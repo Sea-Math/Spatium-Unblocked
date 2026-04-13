@@ -14,7 +14,6 @@
 <body>
     <div id="particles-js"></div>
     
-    <!-- Sidebar -->
     <nav id="navbar">
         <ul id="section1nav">
             <li class="active" onclick="handleNav(event, 'home')" data-target="home">
@@ -43,7 +42,6 @@
         <ul id="section3nav"></ul>
     </nav>
 
-    <!-- Main Content -->
     <div class="container">
         <h1 class="hometitle">Satium</h1>
         <p id="splash">loading...</p>
@@ -63,7 +61,7 @@
         <button onclick="closeNotice()">Understood</button>
     </div>
 
-    <!-- Settings Panel -->
+    <!-- Settings -->
     <div class="settings" id="settings">
         <div class="panel-title">Settings</div>
         <center>
@@ -73,7 +71,7 @@
         </center>
     </div>
 
-    <!-- Updates Panel -->
+    <!-- Updates -->
     <div class="updates" id="updates">
         <div class="panel-title">Updates</div>
         <center>
@@ -83,6 +81,7 @@
 
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
+    <script src="uv/uv.handler.js"></script>   <!-- Added this as you created it -->
     <script src="index.js"></script>
     <script src="site.js"></script>
     <script src="updates.js"></script>
