@@ -1,4 +1,4 @@
-// Satium - index.js (Updated with proper proxy handling)
+// Satium - index.js (Fixed YouTube + proper UV proxy)
 
 function handleNav(event, target) {
     document.querySelectorAll('#navbar li').forEach(li => li.classList.remove('active'));
@@ -23,24 +23,23 @@ function handleNav(event, target) {
     }
 }
 
-// Particle Background
+// Particles
 const pJS = (tag_id) => {
-    const canvas_el = document.createElement('canvas');
-    canvas_el.style.width = "100%";
-    canvas_el.style.height = "100%";
-    document.getElementById(tag_id).appendChild(canvas_el);
-    const ctx = canvas_el.getContext('2d');
+    const canvas = document.createElement('canvas');
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    document.getElementById(tag_id).appendChild(canvas);
+    const ctx = canvas.getContext('2d');
     let w, h, particles = [];
 
     const init = () => {
-        w = canvas_el.width = canvas_el.offsetWidth;
-        h = canvas_el.height = canvas_el.offsetHeight;
+        w = canvas.width = canvas.offsetWidth;
+        h = canvas.height = canvas.offsetHeight;
         particles = [];
         for (let i = 0; i < 60; i++) {
             const shade = Math.floor(Math.random() * 60) + 40;
             particles.push({
-                x: Math.random() * w,
-                y: Math.random() * h,
+                x: Math.random() * w, y: Math.random() * h,
                 vx: Math.random() * 0.6 + 0.3,
                 vy: Math.random() * 0.6 + 0.3,
                 radius: Math.random() * 1.8 + 0.8,
@@ -52,8 +51,7 @@ const pJS = (tag_id) => {
     const draw = () => {
         ctx.clearRect(0, 0, w, h);
         particles.forEach(p => {
-            p.x += p.vx; 
-            p.y += p.vy;
+            p.x += p.vx; p.y += p.vy;
             if (p.x > w) p.x = 0;
             if (p.y > h) p.y = 0;
             ctx.fillStyle = p.color;
@@ -65,17 +63,16 @@ const pJS = (tag_id) => {
     };
 
     window.addEventListener('resize', init);
-    init(); 
-    draw();
+    init(); draw();
 };
 
-// Ultraviolet Proxy Function (Fixed)
+// Main Proxy Function (Uses your uv/ folder)
 function proxyGo(url) {
     if (typeof __uv$config !== "undefined" && __uv$config.prefix) {
         const encoded = __uv$config.encodeUrl(url);
         location.href = __uv$config.prefix + encoded;
     } else {
-        console.warn("Ultraviolet config not loaded - opening in new tab");
+        console.warn("UV not loaded properly - opening directly");
         window.open(url, '_blank');
     }
 }
@@ -84,7 +81,6 @@ function closeNotice() {
     document.getElementById('noticeBox').classList.add('hidden');
 }
 
-// Initialize everything
 window.onload = () => {
     pJS('particles-js');
 
@@ -96,16 +92,13 @@ window.onload = () => {
         if (e.key === "Enter") {
             let q = e.target.value.trim();
             if (q) {
-                if (q.includes('.')) {
-                    proxyGo(q);
-                } else {
-                    proxyGo(`https://www.google.com/search?q=${encodeURIComponent(q)}`);
-                }
+                if (q.includes('.')) proxyGo(q);
+                else proxyGo(`https://www.google.com/search?q=${encodeURIComponent(q)}`);
             }
         }
     });
 
-    // Sidebar slide-in animation
+    // Sidebar animation
     ['section1nav', 'section2nav', 'section3nav'].forEach((id, i) => {
         setTimeout(() => {
             const el = document.getElementById(id);
@@ -113,7 +106,7 @@ window.onload = () => {
         }, 100 + (i * 100));
     });
 
-    // Show welcome notice
+    // Show notice
     setTimeout(() => {
         const notice = document.getElementById('noticeBox');
         if (notice) notice.classList.remove('hidden');
