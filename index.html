@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./Site/images/logo.png">
+    <title>Satium</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <!-- Sidebar -->
+    <nav id="navbar">
+        <ul id="section1nav">
+            <li class="active" onclick="handleNav(event, 'home')" data-target="home">
+                <i class="fa-solid fa-house"></i>
+                <div class="tooltip">Home</div>
+            </li>
+        </ul>
+        <ul id="section2nav">
+            <li onclick="handleNav(event, 'games.html')" data-target="games">
+                <i class="fa-solid fa-gamepad"></i>
+                <div class="tooltip">Games</div>
+            </li>
+            <li onclick="handleNav(event, 'youtube')" data-target="youtube">
+                <i class="fa-brands fa-youtube"></i>
+                <div class="tooltip">YouTube</div>
+            </li>
+            <li onclick="handleNav(event, 'tabconfig')" data-target="tabconfig">
+                <i class="fa-solid fa-window-restore"></i>
+                <div class="tooltip">Tab Config</div>
+            </li>
+            <li onclick="handleNav(event, 'updates')" data-target="updates">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <div class="tooltip">Updates</div>
+            </li>
+        </ul>
+        <ul id="section3nav"></ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="hometitle">Satium</h1>
+        <p id="splash">loading...</p>
+        
+        <div class="inputcontainer">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="homesearch" placeholder="Type or search a URL" autocomplete="off">
+        </div>
+    </div>
+    
+    <p id="online">ENCRYPTED CONNECTION • 200 OK</p>
+
+    <!-- Notice -->
+    <div class="anotice hidden" id="noticeBox">
+        <h2>Notice</h2>
+        <p>Welcome to Satium</p>
+        <button onclick="closeNotice()">Understood</button>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings" id="settings">
+        <div class="panel-title">Settings</div>
+        <center>
+            <input class="setTitle" placeholder="Title" onkeyup="titleSet(this.value)">
+            <input class="setIco" placeholder="Icon URL" onkeyup="icoSet(this.value)">
+            <div class="resetButton" onclick="reset()">Reset</div>
+        </center>
+    </div>
+
+    <!-- Updates Panel -->
+    <div class="updates" id="updates">
+        <div class="panel-title">Updates</div>
+        <center>
+            <div class="updatespage" id="updatespage"></div>
+        </center>
+    </div>
+
+    <script src="uv/uv.bundle.js"></script>
+    <script src="uv/uv.config.js"></script>
+    <script src="index.js"></script>
+    <script src="site.js"></script>
+    <script src="updates.js"></script>
+</body>
+</html>
